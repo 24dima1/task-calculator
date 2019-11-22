@@ -1,0 +1,63 @@
+const input = '9 / 9';
+let arabicNum1;
+let arabicNum2;
+let result;
+//Определение Римских цифр
+const romanDigitsMap = {
+	'I':1,
+  'II':2,
+  'III':3,
+  'IV':4,
+  'V':5,
+  'VI':6,
+  'VII':7,
+  'VIII':8,
+  'IX':9,
+  'X':10,
+}
+
+//Определение знака вычисления.
+const operationSign = getOperationSign(input);
+function getOperationSign(str) {
+  let operation = '';
+const a = ['+', '-', '/', '*'].find((el) => str.includes(el));
+return a;
+}
+
+//Определяем массив данных
+const [num1, num2] = input.split(` ${operationSign} `);
+const arrnumber = [+num1, +num2];
+
+//Условие если 'правильное' число.
+if ( typeof arrnumber[0]=='number' && typeof arrnumber[1]=='number'&& arrnumber[0]<=10 && arrnumber[1]<=10 && arrnumber[1] % 1 ==0 && arrnumber[1] % 1 == 0){
+   
+   arabicNum1 = arrnumber[0];   
+   arabicNum2 = arrnumber[1];
+    
+}else {
+  arabicNum1 = romanDigitsMap[num1];
+  arabicNum2 = romanDigitsMap[num2];
+  
+    
+}
+
+if (operationSign =='+'){
+ result = arabicNum1+arabicNum2;
+}
+if (operationSign =='-'){
+ result = arabicNum1-arabicNum2;
+}
+if (operationSign =='/'){
+ result = arabicNum1/arabicNum2
+}
+if (operationSign =='*'){
+ result = arabicNum1*arabicNum2;
+}
+if (isNaN(result) == true ){
+console.log('Вы ввели не правильные данные')
+
+}    
+
+console.log(result);
+
+
