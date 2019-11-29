@@ -1,4 +1,4 @@
-const input = '9 / 9';
+const input = prompt('Введите число');
 let arabicNum1;
 let arabicNum2;
 let result;
@@ -19,25 +19,46 @@ const romanDigitsMap = {
 //Определение знака вычисления.
 const operationSign = getOperationSign(input);
 function getOperationSign(str) {
-  let operation = '';
+  var operation = '';
 const a = ['+', '-', '/', '*'].find((el) => str.includes(el));
 return a;
 }
 
 //Определяем массив данных
-const [num1, num2] = input.split(` ${operationSign} `);
+const [num1, num2] = input.replace(/\s/g, '').split(`${operationSign}`);
 const arrnumber = [+num1, +num2];
+//console.log(arrnumber);
+//console.log([num1, num2]);
 
-//Условие если 'правильное' число.
+function to_roman(text) {
+ if (!text) return "";
+ var rezult = "";
+ var n = font_ar.length - 1;
+ while (text > 0) {
+    if (text >= font_ar[n]) {
+        rezult += font_rom[n];
+        text -= font_ar[n];
+    }
+    else n--;
+ }
+ return rezult;
+}
+var font_ar = [1,4,5,9,10,40,50,90,100,400,500,900,1000,4000,5000,9000,10000];
+var font_rom = ["I","IV","V","IX","X","XL","L","XCc","C","CD","D","CM","M","M&#8577;","&#8577;","&#8577;&#8578;","&#8578;"];
+
+
+var testData;
+//Валидация
 if ( typeof arrnumber[0]=='number' && typeof arrnumber[1]=='number'&& arrnumber[0]<=10 && arrnumber[1]<=10 && arrnumber[1] % 1 ==0 && arrnumber[1] % 1 == 0){
    
    arabicNum1 = arrnumber[0];   
    arabicNum2 = arrnumber[1];
+   testData = 1;
     
 }else {
   arabicNum1 = romanDigitsMap[num1];
   arabicNum2 = romanDigitsMap[num2];
-  
+   testData = 0;
     
 }
 
@@ -56,8 +77,10 @@ if (operationSign =='*'){
 if (isNaN(result) == true ){
 console.log('Вы ввели не правильные данные')
 
-}    
+}  
+testData == 1 ? console.log(result):console.log(to_roman(result)) ; 
+ 
 
-console.log(result);
+
 
 
