@@ -27,9 +27,8 @@ return a;
 //Определяем массив данных
 const [num1, num2] = input.replace(/\s/g, '').split(`${operationSign}`);
 const arrnumber = [+num1, +num2];
-//console.log(arrnumber);
-//console.log([num1, num2]);
 
+// Функция перевода конечного результа в Римские цифры.
 function to_roman(text) {
  if (!text) return "";
  var rezult = "";
