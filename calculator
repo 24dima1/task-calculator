@@ -1,10 +1,9 @@
 const input = prompt('Введите число');
-let arabicNum1;
-let arabicNum2;
 let result;
-//Определение Римских цифр
+
+
 const romanDigitsMap = {
-	'I':1,
+  'I':1,
   'II':2,
   'III':3,
   'IV':4,
@@ -19,9 +18,9 @@ const romanDigitsMap = {
 //Определение знака вычисления.
 const operationSign = getOperationSign(input);
 function getOperationSign(str) {
-  var operation = '';
-const a = ['+', '-', '/', '*'].find((el) => str.includes(el));
-return a;
+  let operation = '';
+  return  ['+', '-', '/', '*'].find((el) => str.includes(el));
+
 }
 
 //Определяем массив данных
@@ -30,56 +29,48 @@ const arrnumber = [+num1, +num2];
 
 // Функция перевода конечного результа в Римские цифры.
 function to_roman(text) {
- if (!text) return "";
- var rezult = "";
- var n = font_ar.length - 1;
- while (text > 0) {
+  if (text == 0)return console.log('Данного значения нет в римской системе счисления.')
+  var font_ar = [1,4,5,9,10,40,50,90,100,400,500,900,1000,4000,5000,9000,10000];
+  var font_rom = ["I","IV","V","IX","X","XL","L","XCc","C","CD","D","CM","M","M&#8577;","&#8577;","&#8577;&#8578;","&#8578;"];
+  if (!text) return"";
+  var rezult = "";
+  var n = font_ar.length - 1;
+    while (text > 0) {
     if (text >= font_ar[n]) {
-        rezult += font_rom[n];
-        text -= font_ar[n];
-    }
-    else n--;
- }
- return rezult;
+     rezult += font_rom[n];
+     text -= font_ar[n];
+     }
+  else n--;
+   }
+  return rezult;
 }
-var font_ar = [1,4,5,9,10,40,50,90,100,400,500,900,1000,4000,5000,9000,10000];
-var font_rom = ["I","IV","V","IX","X","XL","L","XCc","C","CD","D","CM","M","M&#8577;","&#8577;","&#8577;&#8578;","&#8578;"];
-
 
 var testData;
 //Валидация
-if ( typeof arrnumber[0]=='number' && typeof arrnumber[1]=='number'&& arrnumber[0]<=10 && arrnumber[1]<=10 && arrnumber[1] % 1 ==0 && arrnumber[1] % 1 == 0){
-   
-   arabicNum1 = arrnumber[0];   
-   arabicNum2 = arrnumber[1];
-   testData = 1;
-    
-}else {
-  arabicNum1 = romanDigitsMap[num1];
-  arabicNum2 = romanDigitsMap[num2];
-   testData = 0;
-    
+if(typeof arrnumber[0]=='number' &&
+ typeof arrnumber[1]=='number'&&
+   arrnumber[0]<=10 && arrnumber[1]<=10 &&
+    arrnumber[1] % 1 ==0 &&
+   arrnumber[1] % 1 == 0){
+   console.log(calculation(arrnumber[0],arrnumber[1]));
+  }else if(arrnumber[0]>10 && arrnumber[1]>10){
+   console.log('Введите меньшее число.');
+  }else {
+    console.log(to_roman(calculation(romanDigitsMap[num1],romanDigitsMap[num2]))); 
+  }
+function calculation (arabicNum1,arabicNum2){
+  switch(operationSign) {
+    case '+': result = arabicNum1+arabicNum2;
+    break;  
+    case '-': result = arabicNum1-arabicNum2;
+    break;
+    case '/': result = arabicNum1/arabicNum2;
+    break;
+    case '*': result = arabicNum1*arabicNum2;
+    break;
+  }
+  if (isNaN(result)){
+    console.log('Введите данные, соответствующие условиям задачи.')
 }
-
-if (operationSign =='+'){
- result = arabicNum1+arabicNum2;
-}
-if (operationSign =='-'){
- result = arabicNum1-arabicNum2;
-}
-if (operationSign =='/'){
- result = arabicNum1/arabicNum2
-}
-if (operationSign =='*'){
- result = arabicNum1*arabicNum2;
-}
-if (isNaN(result) == true ){
-console.log('Вы ввели не правильные данные')
-
-}  
-testData == 1 ? console.log(result):console.log(to_roman(result)) ; 
- 
-
-
-
-
+  return result;
+} 
